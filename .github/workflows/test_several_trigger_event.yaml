@@ -1,0 +1,8 @@
+name: test-several-trigerring-event
+run-name: ${{ github.actor }} is learning several trigger
+on: [push, label, create, delete]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.event }}"
