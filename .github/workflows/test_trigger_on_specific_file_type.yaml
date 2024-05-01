@@ -2,8 +2,10 @@ name: file_type_dependent_activation
 run-name: ${{ github.actor }} test triggering depending path and/or file type
 
 on: 
-    push: 
-        paths:  
+    push: # Act as a logical AND
+        branches: 
+            - main
+        paths: # Act as a logical OR
             - app/**
             - '**.js'
 
