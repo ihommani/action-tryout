@@ -1,0 +1,15 @@
+
+name: test-several-trigerring-event
+run-name: ${{ github.actor }} is learning several trigger
+on: [push, label, create, delete]
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+    job2:
+        runs-on: ubuntu-latest
+        needs: job1
+    job3:
+        runs-on: ubuntu-latest
+        if: ${{ always() }}
+        needs: [job1, job2]
+        
