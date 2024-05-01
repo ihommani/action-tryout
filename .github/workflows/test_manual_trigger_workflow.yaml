@@ -1,0 +1,37 @@
+
+name: test-dispatched-workflow
+run-name: ${{ github.actor }} is learning dispatched workflow
+
+on:
+    workflow_dispatch: 
+        inputs:
+            input_1:
+                description: 'input_1'
+                required: true
+                default: 'value2'
+                type: choice
+                options:
+                    - value1
+                    - value2
+                    - value3
+            environment:
+                description: 'environment to run on'
+                type: environment
+                required: true
+            boolean_input:
+                description: 'boolean input'
+                default: false
+                type: boolean
+
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - run: |
+                echo "input_1 $INPUT"
+                echo "environment $ENVIRONMENT"
+                echo "boolean value $BOOLEAN"
+        env:
+            INPUT: ${{ inputs.input_1 }}
+            ENVIRONMENT: ${{ inputs.environment }}
+            BOOLEAN: ${{ inputs.boolean_input }}
