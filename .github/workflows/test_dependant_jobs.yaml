@@ -1,6 +1,6 @@
 
-name: test-several-trigerring-event
-run-name: ${{ github.actor }} is learning several trigger
+name: test-dependant-event
+run-name: ${{ github.actor }} is learning dependant triggers
 on: [push, label, create, delete]
 jobs:
     job1:
