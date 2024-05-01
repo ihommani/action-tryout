@@ -21,6 +21,7 @@ jobs:
     job4: 
         runs-on: ubuntu-latest
         if: ${{ always() }}
+        needs: [job1, job2]
         steps:
             - run: echo "Always run after job1 & job2"
         
