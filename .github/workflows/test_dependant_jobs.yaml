@@ -5,11 +5,22 @@ on: [push, label, create, delete]
 jobs:
     job1:
         runs-on: ubuntu-latest
+        steps:
+            - run: echo "job1"
     job2:
         runs-on: ubuntu-latest
         needs: job1
+        steps:
+            - run: echo 
     job3:
         runs-on: ubuntu-latest
         if: ${{ always() }}
         needs: [job1, job2]
+        steps:
+            - run: echo "job3 depends on job1 & job2 completion"
+    job4: 
+        runs-on: ubuntu-latest
+        if: ${{ always() }}
+        steps:
+            - run: echo "Always run after job1 & job2"
         
