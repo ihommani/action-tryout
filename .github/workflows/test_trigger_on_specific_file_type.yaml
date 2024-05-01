@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} test triggering depending path and/or file type
 on: 
     push: 
         paths:  
-            - app/
+            - app/**
             - '**.js'
 
 jobs:
