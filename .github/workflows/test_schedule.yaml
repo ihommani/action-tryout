@@ -1,0 +1,14 @@
+
+name: test-scheduled-workflow
+run-name: ${{ github.actor }} is learning scheduled workflow
+
+on:
+    schedule:
+        - cron: '1 1 1 1 1'
+    workflow_dispatch: # Enable to manually trigger this workflow
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "scheduled worflow on {{ github.event.schedule }}"
+        
