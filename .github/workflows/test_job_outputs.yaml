@@ -15,10 +15,10 @@ jobs:
         needs: job1 # Important to be allowed to access the output of job1
         steps:
             - env:
-                JOB1_OUTPUT: $ {{ needs.job1.outputs.output1 }}
+                JOB1_OUTPUT: ${{ needs.job1.outputs.output1 }}
               run: echo $JOB1_OUTPUT
             - env:
-                JOB1_OUTPUT: $ {{ needs.job1.outputs.output1 }}
+                JOB1_OUTPUT: ${{ needs.job1.outputs.output1 }}
               if: needs.job1.outputs.output1 == 'job2'
               run: echo "Will never be displayed"
         

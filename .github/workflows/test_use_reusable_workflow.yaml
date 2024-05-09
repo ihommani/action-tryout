@@ -1,0 +1,33 @@
+name: test-to-call-workflow
+run-name: ${{ github.actor }} is learning calling other workflows
+
+on: [workflow_dispatch]
+
+
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        outputs:
+            output1: ${{ steps.step1.job1 }}
+        steps:
+            - id: step1
+              run: echo "toto"
+    calling_reusable_workflow:
+        uses:  ./.github/workflows/reusable_workflow.yaml
+        needs: job1
+        with:
+          config-path: .github/labeler.yml
+        secrets:
+          token: ${{ github.token }}
+    consuming_called_workflow_output:
+        runs-on: ubuntu-latest
+        name: consuming output from called workflow
+        needs: calling_reusable_workflow
+        steps:
+          - id: step1
+            run: |
+              echo "${{needs.calling_reusable_workflow.outputs.message}}"
+              echo "${{needs.calling_reusable_workflow.outputs.message2}}"
+              echo "${{needs.calling_reusable_workflow.outputs.message3}}"
+
+            
